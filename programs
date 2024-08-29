@@ -1,0 +1,50 @@
+-----------------------------------------------------------------------------------------------------
+# Program to Extract Playing Teams
+grep -A 2 'teams:' file | grep '-' | sed 's/ *- //'
+
+# Program to Extract Winner
+sed -n '0,/winner:/s/^ *winner: //p' file > winner
+------------------------------------------------------------------------------------------------------
+
+# Program to Validate No. of Innings
+grep -c ' inning' file | awk '{if($1==2){print "Valid"} else {print "Invalid"}}'
+
+# Program to Extract 1st and 2nd Innings 
+sed -n '/1st/,/2nd/p' file > Inning1 && sed -ne '/2nd/,$ p' file > Inning2
+
+------------------------------------------------------------------------------------------------------
+# Program to Extract Players in their respective teams (Using grep, sed)
+
+grep -o 'batsman: [A-Z]* [A-Za-z]*' Inning1 | sed 's/batsman: //'> temp
+grep -o 'non_striker:.*$' Inning1 | sed 's/non_striker: //' >> temp 
+grep -o 'bowler:.*$' Inning2 | sed 's/bowler: //'>> temp
+sort temp | uniq > Team1
+
+grep -o 'batsman: [A-Z]* [A-Za-z]*' Inning2 | sed 's/batsman: //'>> temp
+grep -o 'non_striker:.*$' Inning2 | sed 's/non_striker: //' >> temp 
+grep -o 'bowler:.*$' Inning1 | sed 's/bowler: //'> temp
+sort temp | uniq > Team2
+
+
+# Alternate Program to Extract Players in their respective teams (Using Awk) 
+
+awk '/batsman: [A-Z].*$/{print $2" "$3}' Inning1 >> temp
+awk '/non_striker:.*$/{print $2" "$3}' Inning1 >> temp
+awk '/bowler:.*$/{print $2" "$3}' Inning2 >> temp
+sort temp|uniq>Team1
+
+awk '/batsman: [A-Z].*$/{print $2" "$3}' Inning2 >> temp
+awk '/non_striker:.*$/{print $2" "$3}' Inning2 >> temp
+awk '/bowler:.*$/{print $2" "$3}' Inning1 >> temp
+sort temp|uniq>Team2
+
+# Program to Validate No. of Players in a Team
+wc -l team | awk '{if($1<=11){print "Valid"} else {print "Invalid"}}'
+---------------------------------------------------------------------------------------------------------
+
+# Program to Validate No. of Wickets
+grep -c 'wicket:' Inning | awk -v cn=$(wc -l Team) '{if($1<=cn){print "Valid"} else{print "Invalid"}}'
+
+# Program to Validate No. of Overs
+grep -o '[0-9]*[0-9]\.0*' Inning |sort|uniq|wc -l|awk '{if($1<=20){print "Valid"} else {print "Invalid"}}'
+

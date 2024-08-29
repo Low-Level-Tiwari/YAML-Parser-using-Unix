@@ -1,0 +1,7 @@
+awk '{if($0>12){print 0}else{print 1}}' Step2/runs >> result;
+sed 's/ //' Step2/runs > k; 
+grep '[^0-9]' k > j; 
+awk 'END{if(NR==0){print 1}else{print 0}}' j > result;
+wc -l Step2/players > k; 
+sed 's/ .*//' k > j; 
+awk '{if($0 < 23){print 1}else{print 0}}' j >> result;

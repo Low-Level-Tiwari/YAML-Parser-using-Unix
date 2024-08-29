@@ -1,0 +1,90 @@
+Typical validations:
+---------------------
+
+
+	awk '{if($0>12){print 0}else{print 1}}' Step2/runs >> result;
+	
+	sed 's/ //' Step2/runs > k; grep '[^0-9]' k > j; awk 'END{if(NR==0){print 1}else{print 0}}' j > result;
+
+	wc -l Step2/players > k; sed 's/ .*//' k > j; awk '{if($0 < 23){print 1}else{print 0}}' j >> result;
+
+
+
+	So these validations have some things in common: 
+
+		1: A Tool which does something, 
+		2: Some String which is understood by that tool as its language,
+		3: An Input file, on which the tool will take as input data,
+		4: Some sort of output file generated, which encompasses the change of state.
+
+	Hence the Overall effect can be captured by visualizing the 'Tool'(1) as Functions/Transformations, where input to function is 
+	some String(2) and an Input file(3), and it gets transformed to some Output file(4).
+
+
+	
+   ---------------------------------------------------
+	Tool(String, inputFile) -> outputFile 
+   ---------------------------------------------------
+
+
+
+
+
+Language:
+----------
+
+	{((utility, program, input, output ),pos),...}
+
+	So the language can be considered Sequence of 4-Tuple (utility, program, input, output)  where the elements are as follows:
+
+		Utility: This is the label of tool which is used for validation
+	
+		Program: This is the language/string understood by tool to perform actions
+	
+		Input: This is label for input file on which utility performs action
+	
+		Output: This is the label for output file i.e. result of actions performed
+	
+
+
+NOTE: 
+------
+
+	To validate the "program" understood by the Utility, is itself like  writing a interpreter for that Utility, which I shall not be 	 able to do in a go or in limited time frame and it'll lose generality. Hence i've decided to start writing validations for the 
+	structural and compositional aspects of validations.
+
+
+
+
+Validations for a Tuple:
+-------------------------
+
+	1.1: Utility ∈ {grep, sed, awk, wc} ...................................Restricted to the Validations I've done
+
+	1.2: |Program| ‡ 0 AND |Input| ‡ 0 AND |Output| ‡ 0
+
+	1.3: Input ‡ Output             .............................. Negation of this overwrites the file
+
+	1.4: program ≡ '.+'             .............................. '.+' is the Positive Closure over all Symbols, Program must be in 									     single quotes ''.
+
+
+
+
+Validations for a Sequence of these Tuple:
+-------------------------------------------
+	
+	2.1: The output of (i-1)th tuple will be Input for ith tuple, except for i = 0.
+	2.2: Output of the tuple with Maximum position will be the output of the whole sequence.
+
+
+
+
+
+
+
+
+
+
+
+
+

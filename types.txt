@@ -1,0 +1,42 @@
+obj-1-1		: Basic Text file
+------------------------------------------------------------------------------------
+
+obj-2-1		: Innings from yaml file
+obj-2-2		: Set of Team names
+obj-2-3		: Set all Players
+obj-2-4 	: Set of kind of Wickets
+obj-2-5		: Set of all sort of Runs
+obj-2-6		: Decision of toss
+obj-2-7		: Winner of match
+obj-2-8		: Venue of the match
+obj-2-9		: Set of Umpires of the match
+obj-2-10	: Sequence of Overs with line number
+obj-2-11	: Sequence of Ball numbers in all overs with line number
+obj-2-12	: Date as 3-Tuple (Year, Month, Date)
+obj-2-13	: City
+obj-2-14	: Gender
+obj-2-15	: Match Type
+obj-2-16	: Won by number of Wickets
+obj-2-17	: Won by Number of Runs
+obj-2-18	: Total Number of Overs in inning
+obj-2-19	: Winner of Toss
+
+---------------------------------------------------------------------------------------
+
+obj-3-1		: Set of Players of respective teams
+obj-3-2 	: Overwise Sequence of Total Runs in an Inning
+obj-3-3 	: Overwise Sequence of Batsman Runs in an Inning
+obj-3-4 	: Overwise Sequence of Extras Runs in an Inning
+obj-3-5 	: Overwise Sequence of Batsman Names
+obj-3-6 	: Overwise Sequence of Non-Striker Names
+obj-3-7 	: Overwise Sequence of Bowlers Names
+obj-3-8 	: Overwise Sequence of Batsmans
+obj-3-9 	: Overwise Sequence of Batsmans
+obj-3-10	: Overwise Sequence of wickets
+
+
+
+        
+
+
+	

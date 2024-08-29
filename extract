@@ -1,0 +1,2 @@
+# Extract Inning 1
+sed '/2nd/q' 1170457.yaml > inning1

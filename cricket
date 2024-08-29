@@ -1,0 +1,29 @@
+#(playerSet) <= 11
+playerSet = {Label}
+
+#(Teams) = 2
+Teams = {(Label, playerSet)}
+isValid(Teams) → (x,a),(y,b) ∈ Teams | x ‡ y & a∩b = {}
+
+
+(winner(toss) ≡ (x,b)) → (x,b) ∈ Teams 
+decision(toss) ∈ {'bat', 'field'} 
+
+
+#(Innings) = 2
+Innings = {(k, Team, OverSeq)}
+isValid(Innings) → isSeq(Innings) & Max(Innings) ≡ 2  & ((f(z),y1,z1),(f(f(z)),y2,z2) ∈ Innings -> y1 ‡ y2 &
+((y1 ≡ winner(toss)) ≡ ~(y2 ≡ winner(toss)))) 
+
+
+#(OverSeq) <= 20
+OverSeq = {(k, Bowler, BallSeq)}
+isValid(Team, OverSeq) → isSeq(OverSeq) & Max(OverSeq) <= 20 & ((x,y1,z1),(f(x),y2,z2) ∈ OverSeq -> y1 ‡ y2 & (y1,y2 ∈ z & ~((x,z) ≡ Team)
+
+
+BallSeq = {(k, Info)}
+isValid(BallSeq)  → isSeq(BallSeq) & Max(BallSeq) = 6 + CountWide(BallSeq) + CountNoBall(BallSeq)
+
+
+Info = (Batsman, Non_Stricker, (Extras, Total, Batsman))
+isValid(Info) → Bastman, Non_Stricker ∈ Team1 ...
